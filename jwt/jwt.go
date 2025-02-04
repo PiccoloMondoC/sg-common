@@ -85,3 +85,12 @@ func Parse(tokenString string, signingKey []byte) (*Claims, error) {
 
 	return claims, nil
 }
+
+
+// ExtractToken removes "Bearer " prefix from Authorization header
+func ExtractToken(authHeader string) string {
+	if len(authHeader) > 7 && authHeader[:7] == "Bearer " {
+		return authHeader[7:] // Extract the token part
+	}
+	return authHeader // Return as is if it's not in "Bearer <token>" format
+}
